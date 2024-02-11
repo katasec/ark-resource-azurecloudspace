@@ -1,0 +1,146 @@
+{
+    "ID": 0,
+    "Name": "default",
+    "Hub": {
+        "Name": "vnet-hub",
+        "AddressPrefix": "10.16.0.0/16",
+        "SubnetsInfo": [
+            {
+                "AddressPrefix": "10.16.0.0/26",
+                "Description": "Subnet for Azure Firewall",
+                "Name": "AzureFirewallSubnet",
+                "Tags": null
+            },
+            {
+                "AddressPrefix": "10.16.0.64/26",
+                "Description": "Subnet for Bastion Host",
+                "Name": "AzureBastionSubnet",
+                "Tags": null
+            },
+            {
+                "AddressPrefix": "10.16.0.128/26",
+                "Description": "Subnet for Azure Firewall Mgmt",
+                "Name": "AzureFirewallManagementSubnet",
+                "Tags": null
+            },
+            {
+                "AddressPrefix": "10.16.0.192/26",
+                "Description": "Subnet for VPN Gateway",
+                "Name": "GatewaySubnet",
+                "Tags": null
+            }
+        ]
+    },
+    "Spokes": [
+        {
+            "Name": "vnet-dev",
+            "AddressPrefix": "10.17.0.0/16",
+            "SubnetsInfo": [
+                {
+                    "AddressPrefix": "10.17.1.0/24",
+                    "Description": "Subnet for AGW",
+                    "Name": "snet-tier1-agw",
+                    "Tags": {
+                        "snet:role": "tier1-agw"
+                    }
+                },
+                {
+                    "AddressPrefix": "10.17.2.0/24",
+                    "Description": "Subnet for other LBs",
+                    "Name": "snet-tier1-webin",
+                    "Tags": {
+                        "snet:role": "tier1-webin"
+                    }
+                },
+                {
+                    "AddressPrefix": "10.17.3.0/25",
+                    "Description": "Tier 1 reserved subnet",
+                    "Name": "snet-tier1-rsvd1",
+                    "Tags": {
+                        "snet:role": "tier1-rsvd1"
+                    }
+                },
+                {
+                    "AddressPrefix": "10.17.3.128/25",
+                    "Description": "Tier 1 reserved subnet",
+                    "Name": "snet-tier1-rsvd2",
+                    "Tags": {
+                        "snet:role": "tier1-rsvd2"
+                    }
+                },
+                {
+                    "AddressPrefix": "10.17.4.0/23",
+                    "Description": "Subnet for web apps",
+                    "Name": "snet-tier2-wbapp",
+                    "Tags": {
+                        "snet:role": "tier2-wbapp"
+                    }
+                },
+                {
+                    "AddressPrefix": "10.17.6.0/24",
+                    "Description": "Tier 2 reserved subnet",
+                    "Name": "snet-tier2-rsvd2",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.7.0/24",
+                    "Description": "Subnet for packer",
+                    "Name": "snet-tier2-pckr",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.8.0/21",
+                    "Description": "Subnet for VMs",
+                    "Name": "snet-tier2-vm",
+                    "Tags": {
+                        "snet:role": "tier2-vm"
+                    }
+                },
+                {
+                    "AddressPrefix": "10.17.16.0/20",
+                    "Description": "Subnet for AKS",
+                    "Name": "snet-tier2-aks",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.32.0/26",
+                    "Description": "Subnet for managed instance",
+                    "Name": "snet-tier3-mi",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.32.64/26",
+                    "Description": "Subnet for SQL Azure",
+                    "Name": "snet-tier3-dbaz",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.32.128/25",
+                    "Description": "Subnet for LB for SQL VM",
+                    "Name": "snet-tier3-dblb",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.33.0/25",
+                    "Description": "Subnet for SQL VM",
+                    "Name": "snet-tier3-dbvm",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.33.128/25",
+                    "Description": "Subnet for storage account/fileshares",
+                    "Name": "snet-tier3-strg",
+                    "Tags": null
+                },
+                {
+                    "AddressPrefix": "10.17.34.0/25",
+                    "Description": "Subnet for redis cache",
+                    "Name": "snet-tier3-redis",
+                    "Tags": null
+                }
+            ]
+        }
+    ],
+    "Status": "",
+    "UpdateId": ""
+}

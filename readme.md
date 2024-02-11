@@ -1,3 +1,4 @@
 # Overview
 
-Azure Cloudspace Resource.
+Terraform for creating an Azure Cloud Space
+
