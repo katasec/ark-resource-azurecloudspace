@@ -1,8 +1,7 @@
 package main
 
 import (
-	"ark-resource-azurecloudspace/azuredc"
-
+	"github.com/katasec/ark/resources/azure/cloudspaces"
 	"github.com/katasec/playground/utils"
 	network "github.com/pulumi/pulumi-azure-native/sdk/go/azure/network"
 	"github.com/pulumi/pulumi-azure-native/sdk/go/azure/resources"
@@ -10,10 +9,7 @@ import (
 )
 
 var (
-	launchVmFlag      = false
-	launchBastionFlag = false
-	launchK8sFlag     = true
-	configdata        = readConfigData()
+	configdata = readConfigData()
 )
 
 // NewDC creates a new data centre based on a reference azuredc
@@ -26,8 +22,10 @@ func NewDC(ctx *pulumi.Context) error {
 	utils.ExitOnError(err)
 	//hubVnet, firewall := CreateHub(ctx, hubrg, &azuredc.ReferenceHubVNET)
 
-	CreateHub(ctx, hubrg, &azuredc.ReferenceHubVNET)
+	CreateHub(ctx, hubrg, configdata.Hub)
+
 	// Create some spokes
+
 	//rg1, vnet1 := AddSpoke(ctx, "nprod", hubrg, hubVnet, firewall, 0)
 	// rg2, vnet2 := AddSpoke(ctx, "prod", hubrg, hubVnet, firewall, 1)
 	//AddSpoke(ctx, "prod", hubrg, hubVnet, firewall, 1)
@@ -37,13 +35,13 @@ func NewDC(ctx *pulumi.Context) error {
 }
 
 // Creates an Azure Virtual Network and subnets using the provided VNETInfo
-func CreateHub(ctx *pulumi.Context, rg *resources.ResourceGroup, vnetInfo *azuredc.VNETInfo) (*network.VirtualNetwork, *network.AzureFirewall) {
+func CreateHub(ctx *pulumi.Context, rg *resources.ResourceGroup, vnetInfo cloudspaces.VNETInfo) (*network.VirtualNetwork, *network.AzureFirewall) {
 
 	// Generate list of subnets to create
 	subnets := network.SubnetTypeArray{}
 	for _, subnet := range vnetInfo.SubnetsInfo {
 		subnets = append(subnets, network.SubnetTypeArgs{
-			AddressPrefix: pulumi.String(subnet.AddressPrefix),
+			AddressPrefix: pulumi.String(subnet.AddressPrefixes),
 			Name:          pulumi.String(subnet.Name),
 		})
 	}
@@ -60,9 +58,8 @@ func CreateHub(ctx *pulumi.Context, rg *resources.ResourceGroup, vnetInfo *azure
 	})
 
 	// Create Firewall
-	//firewall := createFirewall(ctx, rg, vnet)
+	firewall := createFirewall(ctx, rg, vnet)
 	utils.ExitOnError(err)
 
-	firewall := &network.AzureFirewall{}
 	return vnet, firewall
 }

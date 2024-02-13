@@ -8,6 +8,7 @@ require (
 	github.com/katasec/ark v0.0.23
 	github.com/katasec/playground v0.0.0-20221118145227-070be379cc7d
 	github.com/pulumi/pulumi-azure-native/sdk v1.93.0
+	github.com/pulumi/pulumi-azure/sdk/v5 v5.23.0
 	github.com/pulumi/pulumi-azuread/sdk/v5 v5.47.1
 	github.com/pulumi/pulumi/sdk/v3 v3.105.0
 )

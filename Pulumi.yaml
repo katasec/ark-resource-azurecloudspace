@@ -1,7 +1,3 @@
 name: ark-resource-azurecloudspace
 runtime: go
-description: create a resource group in Azure
-config:
-  pulumi:tags:
-    value:
-      pulumi:template: https://www.pulumi.com/ai/api/project/837e61c5-bfcc-4c96-a129-930076de765a.zip
+description: Create an Azure Cloudspace

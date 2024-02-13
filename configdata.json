@@ -1,16 +1,16 @@
 {
     "ID": 0,
-    "ResourceGroup": "rg-hub-jyvwam",
+    "ResourceGroup": "rg-hub",
     "Location": "UAE North",
     "Name": "default",
     "Hub": {
-        "ResourceGroup": "rg-hub-jyvwam",
+        "ResourceGroup": "rg-hub",
         "Name": "vnet-hub",
         "AddressPrefix": "10.16.0.0/16",
         "SubnetsInfo": [
             {
                 "Name": "AzureFirewallSubnet",
-                "ResourceGroupName": "rg-hub-jyvwam",
+                "ResourceGroupName": "rg-hub",
                 "VirtualNetworkName": "vnet-hub",
                 "AddressPrefixes": "10.16.0.0/26",
                 "Description": "Subnet for Azure Firewall",
@@ -18,7 +18,7 @@
             },
             {
                 "Name": "AzureBastionSubnet",
-                "ResourceGroupName": "rg-hub-jyvwam",
+                "ResourceGroupName": "rg-hub",
                 "VirtualNetworkName": "vnet-hub",
                 "AddressPrefixes": "10.16.0.64/26",
                 "Description": "Subnet for Bastion Host",
@@ -26,7 +26,7 @@
             },
             {
                 "Name": "AzureFirewallManagementSubnet",
-                "ResourceGroupName": "rg-hub-jyvwam",
+                "ResourceGroupName": "rg-hub",
                 "VirtualNetworkName": "vnet-hub",
                 "AddressPrefixes": "10.16.0.128/26",
                 "Description": "Subnet for Azure Firewall Mgmt",
@@ -34,7 +34,7 @@
             },
             {
                 "Name": "GatewaySubnet",
-                "ResourceGroupName": "rg-hub-jyvwam",
+                "ResourceGroupName": "rg-hub",
                 "VirtualNetworkName": "vnet-hub",
                 "AddressPrefixes": "10.16.0.192/26",
                 "Description": "Subnet for VPN Gateway",
@@ -44,13 +44,13 @@
     },
     "Spokes": [
         {
-            "ResourceGroup": "rg-dev-jyvwam",
+            "ResourceGroup": "rg-dev",
             "Name": "vnet-dev",
             "AddressPrefix": "10.17.0.0/16",
             "SubnetsInfo": [
                 {
                     "Name": "snet-tier1-agw",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.1.0/24",
                     "Description": "Subnet for AGW",
@@ -60,7 +60,7 @@
                 },
                 {
                     "Name": "snet-tier1-webin",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.2.0/24",
                     "Description": "Subnet for other LBs",
@@ -70,7 +70,7 @@
                 },
                 {
                     "Name": "snet-tier1-rsvd1",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.3.0/25",
                     "Description": "Tier 1 reserved subnet",
@@ -80,7 +80,7 @@
                 },
                 {
                     "Name": "snet-tier1-rsvd2",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.3.128/25",
                     "Description": "Tier 1 reserved subnet",
@@ -90,7 +90,7 @@
                 },
                 {
                     "Name": "snet-tier2-wbapp",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.4.0/23",
                     "Description": "Subnet for web apps",
@@ -100,7 +100,7 @@
                 },
                 {
                     "Name": "snet-tier2-rsvd2",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.6.0/24",
                     "Description": "Tier 2 reserved subnet",
@@ -108,7 +108,7 @@
                 },
                 {
                     "Name": "snet-tier2-pckr",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.7.0/24",
                     "Description": "Subnet for packer",
@@ -116,7 +116,7 @@
                 },
                 {
                     "Name": "snet-tier2-vm",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.8.0/21",
                     "Description": "Subnet for VMs",
@@ -126,7 +126,7 @@
                 },
                 {
                     "Name": "snet-tier2-aks",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.16.0/20",
                     "Description": "Subnet for AKS",
@@ -134,7 +134,7 @@
                 },
                 {
                     "Name": "snet-tier3-mi",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.32.0/26",
                     "Description": "Subnet for managed instance",
@@ -142,7 +142,7 @@
                 },
                 {
                     "Name": "snet-tier3-dbaz",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.32.64/26",
                     "Description": "Subnet for SQL Azure",
@@ -150,7 +150,7 @@
                 },
                 {
                     "Name": "snet-tier3-dblb",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.32.128/25",
                     "Description": "Subnet for LB for SQL VM",
@@ -158,7 +158,7 @@
                 },
                 {
                     "Name": "snet-tier3-dbvm",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.33.0/25",
                     "Description": "Subnet for SQL VM",
@@ -166,7 +166,7 @@
                 },
                 {
                     "Name": "snet-tier3-strg",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.33.128/25",
                     "Description": "Subnet for storage account/fileshares",
@@ -174,7 +174,7 @@
                 },
                 {
                     "Name": "snet-tier3-redis",
-                    "ResourceGroupName": "rg-dev-jyvwam",
+                    "ResourceGroupName": "rg-dev",
                     "VirtualNetworkName": "vnet-dev",
                     "AddressPrefixes": "10.17.34.0/25",
                     "Description": "Subnet for redis cache",
