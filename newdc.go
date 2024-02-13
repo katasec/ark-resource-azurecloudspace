@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/katasec/ark/resources/azure/cloudspaces"
 	"github.com/katasec/playground/utils"
 	network "github.com/pulumi/pulumi-azure-native/sdk/go/azure/network"
@@ -20,12 +22,14 @@ func NewDC(ctx *pulumi.Context) error {
 		Location: pulumi.String(configdata.Location),
 	})
 	utils.ExitOnError(err)
-	//hubVnet, firewall := CreateHub(ctx, hubrg, &azuredc.ReferenceHubVNET)
+	hubVnet, firewall := CreateHub(ctx, hubrg, configdata.Hub)
 
-	CreateHub(ctx, hubrg, configdata.Hub)
+	//CreateHub(ctx, hubrg, configdata.Hub)
 
 	// Create some spokes
-
+	for _, spoke := range configdata.Spokes {
+		AddSpoke(ctx, spoke.Name, hubrg, hubVnet, firewall, spoke)
+	}
 	//rg1, vnet1 := AddSpoke(ctx, "nprod", hubrg, hubVnet, firewall, 0)
 	// rg2, vnet2 := AddSpoke(ctx, "prod", hubrg, hubVnet, firewall, 1)
 	//AddSpoke(ctx, "prod", hubrg, hubVnet, firewall, 1)
@@ -62,4 +66,31 @@ func CreateHub(ctx *pulumi.Context, rg *resources.ResourceGroup, vnetInfo clouds
 	utils.ExitOnError(err)
 
 	return vnet, firewall
+}
+
+func AddSpoke(ctx *pulumi.Context, spokeName string, hubrg *resources.ResourceGroup, hubVnet *network.VirtualNetwork, firewall *network.AzureFirewall, spoke cloudspaces.VNETInfo) (*resources.ResourceGroup, *network.VirtualNetwork) {
+
+	// Create a resource group
+	rg, err := resources.NewResourceGroup(ctx, spoke.ResourceGroup, &resources.ResourceGroupArgs{
+		Location: hubrg.Location,
+	})
+	utils.ExitOnError(err)
+
+	// Create a route to firewall
+	routeName := fmt.Sprintf("rt-%s", spokeName)
+	spokeRoute := createFWRoute(ctx, rg, routeName, firewall)
+
+	// Create VNET using generated ResourceGroup, Route & CIDRs
+	vnet := CreateVNET(ctx, rg, &spoke, spokeRoute)
+
+	// Peer hub with spoke
+	pulumiUrn1 := fmt.Sprintf("hub-to-%s", spokeName)
+	peerNetworks(ctx, pulumiUrn1, hubrg, hubVnet, vnet)
+
+	// Peer spoke with hub
+	pulumiUrn2 := fmt.Sprintf("%s-to-hub", spokeName)
+	peerNetworks(ctx, pulumiUrn2, rg, vnet, hubVnet)
+
+	return rg, vnet
+
 }

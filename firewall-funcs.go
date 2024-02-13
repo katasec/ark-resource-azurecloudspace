@@ -99,7 +99,9 @@ func createFirewall(ctx *pulumi.Context, rg *resources.ResourceGroup, vnet *netw
 		FirewallPolicy: network.SubResourceArgs{
 			Id: fwPolicy.ID(),
 		},
-	}, pulumi.DependsOn([]pulumi.Resource{vnet}))
+	}, pulumi.DependsOn([]pulumi.Resource{
+		vnet,
+		fwPolicy}))
 	utils.ExitOnError(err)
 
 	return firewall
@@ -148,7 +150,7 @@ func createFirewallPolicy(ctx *pulumi.Context, rg *resources.ResourceGroup) *net
 				},
 			},
 		},
-	})
+	}, pulumi.DependsOn([]pulumi.Resource{firewallPolicy}))
 	utils.ExitOnError(err)
 
 	return firewallPolicy
