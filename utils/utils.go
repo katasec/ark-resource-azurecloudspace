@@ -2,7 +2,6 @@ package utils
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -14,10 +13,10 @@ func ExitOnError(err error) {
 }
 
 func createTempK8sYaml() string {
-	file, err := ioutil.TempFile("", "")
+	file, err := os.CreateTemp("", "")
 	ExitOnError(err)
 
-	buf, err := ioutil.ReadFile("./deployment.yaml")
+	buf, err := os.ReadFile("./deployment.yaml")
 	ExitOnError(err)
 
 	yaml := string(buf)
